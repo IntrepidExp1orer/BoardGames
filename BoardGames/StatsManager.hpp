@@ -5,10 +5,10 @@
 class StatsManager {
 private:
 	std::string filename;
-	std::vector<Player> all_players;
+	std::vector<Player> allPlayers;
 public:
 	StatsManager(const std::string& file);
-	void LoadStats(std::vector<Player>& current_players);
-	void SaveStats(std::vector<Player>& current_players);
+	void LoadStats(std::vector<Player>& currentPlayers);
+	void SaveStats(std::vector<Player>& currentPlayers);
 	void ShowStats();
 };

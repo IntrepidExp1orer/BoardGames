@@ -5,14 +5,14 @@ Dice::Dice() : values{1, 1, 1, 1, 1} {}
 
 void Dice::RollAll() {
 	for (int& i : values) {
-		int n = rand() % 6 + 1;
+		int n = rand() % FACES + 1;
 		i = n;
 	}
 }
 
 void Dice::RollSelected(const std::vector<int>& indices) {
 	for (int i : indices) {
-		if (i > 0 && i < 6) values[i-1] = rand() % 6 + 1;
+		if (i > 0 && i < FACES) values[i-1] = rand() % FACES + 1;
 	}
 }
 

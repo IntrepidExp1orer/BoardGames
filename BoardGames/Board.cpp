@@ -19,23 +19,27 @@ void Board::Show() {
 
 
 int Board::GetValue(int row, int col) {
-	if (row >= 0 && row < rows && col >= 0 && col < columns) return grid[row][col].GetValue();
+	if (row < 0 || row > rows) return 0;
+	else if (col < 0 || col > columns) return 0;
+	else return grid[row][col].GetValue();
 }
 
 
 void Board::SetValue(int row, int col, int val) {
-	if (row >= 0 && row < rows && col >= 0 && col < columns) grid[row][col].SetValue(val);
+	if (row >= 0 || row < rows)
+	if (col >= 0 || col < columns)
+	grid[row][col].SetValue(val);
 }
 
 
 int Board::PointSum(int col) {
 	if (col < 0 || col >= columns) return 0;
 
-	int PSum = 0;
+	int pointSum = 0;
 	for (int i = 0; i < rows - 1; i++) {
-		PSum += grid[i][col].GetValue();
+		pointSum += grid[i][col].GetValue();
 	}
 
-	grid[rows-1][col].SetValue(PSum);
-	return PSum;
+	grid[rows-1][col].SetValue(pointSum);
+	return pointSum;
 }

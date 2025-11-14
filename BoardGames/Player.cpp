@@ -1,19 +1,19 @@
 ﻿#include "Player.hpp"
 
-Player::Player(const std::string& name) : name(name), win_count(0) {
+Player::Player(const std::string& name) : name(name), winCount(0) {
 }
 
 void Player::AddWin() {
-	win_count += 1;
+	winCount += 1;
 }
 
 void Player::SetStats(int wins) {
-	win_count = wins;
+	winCount = wins;
 }
 
 
 int Player::GetStats() {
-	return win_count;
+	return winCount;
 }
 
 std::string Player::GetName() {

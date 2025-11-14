@@ -4,7 +4,7 @@
 class Player {
 private:
 	std::string name;
-	int win_count;
+	int winCount;
 public:
 	Player() = default;
 	~Player() = default;

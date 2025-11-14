@@ -5,7 +5,7 @@
 
 class Game {
 protected:
-	std::string current_game;
+	std::string currentGame;
 	std::vector<Player>& players;
 public:
 	explicit Game(std::vector<Player>& currentPlayers);

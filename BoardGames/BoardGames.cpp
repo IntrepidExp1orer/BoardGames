@@ -14,11 +14,11 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    GameManager g_manager;
-    StatsManager s_manager("game_stats.txt");
-    g_manager.AddPlayers();
-    std::vector<Player>& playerList = g_manager.GetPlayerList();
-    s_manager.LoadStats(playerList);
+    GameManager gManager;
+    StatsManager sManager("game_stats.txt");
+    gManager.AddPlayers();
+    std::vector<Player>& playerList = gManager.GetPlayerList();
+    sManager.LoadStats(playerList);
 
 
     int menuChoice = 3;
@@ -32,12 +32,12 @@ int main()
 
         switch (menuChoice) {
         case 1:
-            s_manager.ShowStats();
+            sManager.ShowStats();
             break;
         case 2:
-            g_manager.Run();
-            playerList = g_manager.GetPlayerList();
-            s_manager.SaveStats(playerList);
+            gManager.Run();
+            playerList = gManager.GetPlayerList();
+            sManager.SaveStats(playerList);
             break;
         case 0:
             std::cout << "Завершение работы.\n";
