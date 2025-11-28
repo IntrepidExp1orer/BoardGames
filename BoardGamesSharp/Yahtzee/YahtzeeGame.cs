@@ -58,13 +58,12 @@ public class YahtzeeGame : Game
                 winner = j;
                 draw = false;
             }
+        }
 
-
-            if (!draw)
-            {
-                players[winner].AddWin();
-                Console.WriteLine($"Победил {players[winner].Name}");
-            }
+        if (!draw)
+        {
+            players[winner].AddWin();
+            Console.WriteLine($"Победил {players[winner].Name}");
         }
     }
 

@@ -28,7 +28,7 @@ public class GameManager
         Console.WriteLine("Текущие результаты после игры: ");
         foreach(Player player in players)
         {
-            Console.Write($"{player.Name}: {player.Wins}");
+            Console.WriteLine($"{player.Name}: {player.Wins}");
         }
     }
 
@@ -37,6 +37,7 @@ public class GameManager
         int count = -1;
         while (count < 0)
         {
+            Console.Write("Введите количество игроков: ");
             string countStr = Console.ReadLine();
             if (!int.TryParse(countStr, out count) || count < 0) { Console.WriteLine("Некорректный ввод."); }
         }
