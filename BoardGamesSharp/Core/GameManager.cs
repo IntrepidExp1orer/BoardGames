@@ -35,11 +35,11 @@ public class GameManager
     public void AddPlayers()
     {
         int count = -1;
-        while (count < 0)
+        while (count <= 0)
         {
             Console.Write("Введите количество игроков: ");
             string countStr = Console.ReadLine();
-            if (!int.TryParse(countStr, out count) || count < 0) { Console.WriteLine("Некорректный ввод."); }
+            if (!int.TryParse(countStr, out count) || count <= 0) { Console.WriteLine("Некорректный ввод."); }
         }
 
         players.Clear();
