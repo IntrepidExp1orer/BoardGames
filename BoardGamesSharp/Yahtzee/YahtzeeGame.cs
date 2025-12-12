@@ -29,7 +29,7 @@ public class YahtzeeGame : Game
         {
             for (int j = 0; j < players.Count; j++)
             {
-                Console.WriteLine($"\nИгрок {players[j].Name}:");
+                Console.WriteLine($"\nИгрок {players[j].name}:");
                 dice.RollAll();
                 dice.Show();
                 ProcessMove();
@@ -63,7 +63,7 @@ public class YahtzeeGame : Game
         if (!draw)
         {
             players[winner].AddWin();
-            Console.WriteLine($"Победил {players[winner].Name}");
+            Console.WriteLine($"Победил {players[winner].name}");
         }
     }
 

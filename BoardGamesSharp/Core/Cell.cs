@@ -8,13 +8,7 @@ namespace BoardGamesSharp.Core;
 
 public class Cell(int v = 0)
 {
-    private int val = v;
-
-    public int Val
-    {
-        get { return val; }
-        set { val = value; }
-    }
+    public int val { get; set; } = v;
 
     public void Clear() { val = 0; }
 }

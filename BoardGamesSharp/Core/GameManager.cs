@@ -11,7 +11,7 @@ namespace BoardGamesSharp.Core;
 
 public class GameManager
 {
-    private List<Player> players = new List<Player>();
+    public List<Player> players { get; } = new List<Player>();
 
     public void Run()
     {
@@ -28,7 +28,7 @@ public class GameManager
         Console.WriteLine("Текущие результаты после игры: ");
         foreach(Player player in players)
         {
-            Console.WriteLine($"{player.Name}: {player.Wins}");
+            Console.WriteLine($"{player.name}: {player.winCount}");
         }
     }
 
@@ -78,5 +78,7 @@ public class GameManager
         return null;
     }
 
-    public List<Player> GetPlayerList() { return players; }
+
+
+
 }

@@ -14,7 +14,7 @@ class Program
         StatsManager sManager = new StatsManager("game_stats.txt");
 
         gManager.AddPlayers();
-        List<Player> playerList = gManager.GetPlayerList();
+        List<Player> playerList = gManager.players;
         sManager.LoadStats(playerList);
 
 
