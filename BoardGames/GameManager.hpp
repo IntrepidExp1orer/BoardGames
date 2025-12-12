@@ -6,14 +6,17 @@
 
 
 class GameManager {
-private:
-	std::vector<Player> players;
 public:
+	using PlayerPtr = std::shared_ptr<Player>;
+
 	GameManager() = default;
 	~GameManager() = default;
 
 	void Run();
 	std::unique_ptr<Game> ChooseGame();
 	void AddPlayers();
-	std::vector<Player>& GetPlayerList();
+	const std::vector<PlayerPtr>& GetPlayerList() const { return players; }
+private:
+	std::vector<PlayerPtr> players;
+	std::unique_ptr<Game> currentGame;
 };

@@ -5,7 +5,7 @@
 #include "Board.hpp"
 
 
-YahtzeeGame::YahtzeeGame(std::vector<Player>& currentPlayers) : Game(currentPlayers) {}
+YahtzeeGame::YahtzeeGame(const std::vector<PlayerPtr>& players) : Game(players) {}
 
 void YahtzeeGame::Start() {
 	srand(static_cast<unsigned>(time(nullptr)));
@@ -16,7 +16,7 @@ void YahtzeeGame::Start() {
 	scoreBoard.Show();
 	for (int i = 0; i < HANDS; i++) {
 		for (int j = 0; j < players.size(); j++) {
-			std::cout << "\n- Игрок " << players[j].GetName() << ":\n";
+			std::cout << "\n- Игрок " << players[j]->GetName() << ":\n";
 			dice.RollAll();
 			dice.Show();
 			Process_move();
@@ -43,8 +43,8 @@ void YahtzeeGame::Start() {
 	}
 
 	if (!draw) {
-		players[winner].AddWin();
-		std::cout << "Победил " << players[winner].GetName();
+		players[winner]->AddWin();
+		std::cout << "Победил " << players[winner]->GetName();
 	}
 }
 

@@ -2,9 +2,12 @@
 #include "Game.hpp"
 #include "Player.hpp"
 
-Game::Game(std::vector<Player>& currentPlayers) : players(currentPlayers) {}
+Game::Game(const std::vector<PlayerPtr>& players) : players(players) {}
 
 
-std::vector<Player> Game::GetPlayerList() {
-	return players;
+const std::vector<std::shared_ptr<Player>>& Game::GetPlayerList() const {
+    return players;
 }
+
+
+

@@ -9,7 +9,7 @@ private:
 	Dice dice;
 	const int HANDS = 6;
 public:
-	YahtzeeGame(std::vector<Player>& currentPlayers);
-	void Start();
+	YahtzeeGame(const std::vector<PlayerPtr>& players);
+	void Start() override;
 	void Process_move();
 };
