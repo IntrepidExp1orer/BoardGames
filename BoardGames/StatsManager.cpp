@@ -13,15 +13,10 @@ StatsManager::StatsManager(const std::string& file) : filename(file) {
 void StatsManager::LoadStats(std::vector <std::shared_ptr<Player>>& currentPlayers) {
 	allPlayers.clear();
 
-	std::ofstream fout("game_stats.txt");
-	if (!fout.is_open()) {
-		std::cerr << "Ошибка создания файла!\n";
-	}
-	fout.close();
 
 	std::ifstream fin(filename);
 	if (!fin.is_open()) {
-		std::cout << "Ошибка при открытии файла.\n";
+		std::ofstream fout("game_stats.txt");
 		return;
 	}
 
