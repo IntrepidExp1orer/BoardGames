@@ -12,9 +12,12 @@ public:
 	~Board() = default;
 
 	Board(int row, int column);
-	void Show();
+
+	Board(const Board& saveState);
 	
 	int GetValue(int row, int col);
 	void SetValue(int row, int col, int value);
 	int PointSum(int col);
+
+	friend std::ostream& operator<<(std::ostream& os, const Board& b);
 };

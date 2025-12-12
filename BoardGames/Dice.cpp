@@ -16,12 +16,14 @@ void Dice::RollSelected(const std::vector<int>& indices) {
 	}
 }
 
-void Dice::Show() {
-	std::cout << "[";
-	for (int i : values) {
-		std::cout << i << "  ";
+
+std::ostream& operator<<(std::ostream& os, const Dice& dice) {
+	os << "[";
+	for (int i : dice.values) {
+		os << " " << i ;
 	}
-	std::cout << "]\n";
+	os << " ]";
+	return os;
 }
 
 int Dice::Sum() {

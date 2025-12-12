@@ -13,19 +13,20 @@ void YahtzeeGame::Start() {
 	Board scoreBoard(HANDS + 1, players.size());
 
 	std::cout << "\n----- Yahtzee -----\n";
-	scoreBoard.Show();
+	std::cout << scoreBoard << std::endl;
 	for (int i = 0; i < HANDS; i++) {
 		for (int j = 0; j < players.size(); j++) {
-			std::cout << "\n- Игрок " << players[j]->GetName() << ":\n";
+			std::string message = "Игрок " + players[j]->GetName() + ":\n";
+			std::cout << message;
 			dice.RollAll();
-			dice.Show();
+			std::cout << dice << std::endl;
 			Process_move();
 
 			// На данный момент не отражает реальный геймплей
 			scoreBoard.SetValue(i, j, dice.Sum());
 			scoreBoard.PointSum(j);
 		}
-		scoreBoard.Show();
+		std::cout << scoreBoard << std::endl;
 	}
 
 	// Зачисление победы
@@ -69,9 +70,7 @@ void YahtzeeGame::Process_move() {
 		while (ss >> temp) indices.push_back(temp);
 
 		dice.RollSelected(indices);
-		dice.Show();
+		std::cout << dice << std::endl;
 		extraRolls--;
 	}
-
-
 }

@@ -13,6 +13,7 @@ public:
 
 	void RollAll();
 	void RollSelected(const std::vector<int>&);
-	void Show();
 	int Sum();
+
+	friend std::ostream& operator<<(std::ostream& os, const Dice& d);
 };

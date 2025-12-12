@@ -4,6 +4,7 @@
 Player::Player(const std::string& name) : name(name), winCount(0) {
 }
 
+Player::Player(const Player& other) : name(other.name), winCount(other.winCount) {}
 
 void Player::AddWin() {
 	winCount += 1;
