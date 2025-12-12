@@ -7,9 +7,12 @@
 class YahtzeeGame : public Game {
 private:
 	Dice dice;
-	const int HANDS = 6;
+	static int hands;
 public:
 	YahtzeeGame(const std::vector<PlayerPtr>& players);
 	void Start() override;
 	void Process_move();
+
+	static void SetHands(int number);
+	static int GetHands();
 };

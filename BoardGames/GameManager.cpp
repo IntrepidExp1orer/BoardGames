@@ -50,6 +50,17 @@ std::unique_ptr<Game> GameManager::ChooseGame() {
 
     switch (gameChoice) {
     case 1:
+        std::cout << "Хотите изменить число ходов? (Тек.: " << YahtzeeGame::GetHands() << ") ";
+        char choice;
+        std::cin >> choice;
+        if (choice == 'y' || choice == 'Y') {
+            int num = 0;
+            while (num < 2 || num > 19) {
+                std::cout << "Выберете число ходов (от 2 до 19): ";
+                std::cin >> num;
+            }
+            YahtzeeGame::SetHands(num);
+        }
         return std::make_unique<YahtzeeGame>(players);
     case 0:
         return nullptr;

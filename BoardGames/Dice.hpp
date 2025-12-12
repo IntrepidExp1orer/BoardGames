@@ -6,7 +6,7 @@
 class Dice {
 private:
 	std::array<int, 5> values;
-	const int FACES = 6;
+	static const int FACES = 6;
 public:
 	Dice();
 	~Dice() = default;
