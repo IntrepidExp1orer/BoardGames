@@ -13,6 +13,9 @@ public:
 	virtual ~Game() = default;
 
 	virtual void Start() = 0;
+	virtual void Rules() const;
+
+	void Run();
 
 	const std::vector<PlayerPtr>& GetPlayerList() const;
 

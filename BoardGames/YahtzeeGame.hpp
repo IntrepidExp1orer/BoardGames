@@ -12,6 +12,7 @@ public:
 	YahtzeeGame(const std::vector<PlayerPtr>& players);
 	void Start() override;
 	void Process_move();
+	void Rules() const override;
 
 	static void SetHands(int number);
 	static int GetHands();

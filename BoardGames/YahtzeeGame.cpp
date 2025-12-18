@@ -86,3 +86,8 @@ void YahtzeeGame::SetHands(int number) {
 int YahtzeeGame::GetHands() {
 	return hands;
 }
+
+void YahtzeeGame::Rules() const {
+	Game::Rules();
+	std::cout << "Игроки по очереди бросают кубики до трех раз за ход.\nПри перебросе можно выбрать какие кубики оставить.\nЦель - выбить максимум очков.\n";
+}

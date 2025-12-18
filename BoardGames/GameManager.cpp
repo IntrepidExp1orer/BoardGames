@@ -12,8 +12,7 @@ void GameManager::Run() {
         std::cout << "Выход из программы.\n";
     }
     else {
-        std::cout << "Запуск игры...\n\n";
-        currentGame->Start();
+        currentGame->Run();
     }
 
     std::cout << "\nТекущие результаты после игры:\n";
