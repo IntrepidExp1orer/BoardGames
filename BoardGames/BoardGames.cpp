@@ -17,7 +17,7 @@ int main()
     GameManager gManager;
     StatsManager sManager("game_stats.txt");
     gManager.AddPlayers();
-    std::vector<Player>& playerList = gManager.GetPlayerList();
+    auto playerList = gManager.GetPlayerList();
     sManager.LoadStats(playerList);
 
 

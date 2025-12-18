@@ -34,7 +34,7 @@ public class Board
         {
             for (int c = 0; c < columns ; c++)
             {
-                Console.Write($"{grid[r, c].Val,6}");
+                Console.Write($"{grid[r, c].val,6}");
             }
             Console.WriteLine();
         }
@@ -44,7 +44,7 @@ public class Board
     {
         if (row < 0 || row >= rows) return 0;
         else if (column < 0 || column >= columns) return 0;
-        else return grid[row, column].Val;
+        else return grid[row, column].val;
     }
 
 
@@ -52,7 +52,7 @@ public class Board
     {
         if (row >= 0 && row < rows)
         if (column >= 0 && column < columns)
-        grid[row, column].Val = val;
+        grid[row, column].val = val;
     }
 
 
@@ -63,10 +63,10 @@ public class Board
         int pointSum = 0;
         for (int i = 0; i < rows - 1; i++)
         {
-            pointSum += grid[i, column].Val;
+            pointSum += grid[i, column].val;
         }
 
-        grid[rows-1, column].Val = pointSum;
+        grid[rows-1, column].val = pointSum;
         return pointSum;
     }
 }

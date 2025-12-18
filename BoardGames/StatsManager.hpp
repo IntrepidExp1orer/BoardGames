@@ -1,14 +1,15 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include "Player.hpp"
 
 class StatsManager {
 private:
 	std::string filename;
-	std::vector<Player> allPlayers;
+	std::vector<std::shared_ptr<Player>> allPlayers;
 public:
 	StatsManager(const std::string& file);
-	void LoadStats(std::vector<Player>& currentPlayers);
-	void SaveStats(std::vector<Player>& currentPlayers);
+	void LoadStats(std::vector <std::shared_ptr<Player>>& currentPlayers);
+	void SaveStats(const std::vector<std::shared_ptr<Player>>& currentPlayers);
 	void ShowStats();
 };

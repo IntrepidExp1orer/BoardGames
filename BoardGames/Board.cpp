@@ -7,14 +7,16 @@ Board::Board(int row, int column) : rows(row), columns(column) {
 	grid.resize(rows, std::vector<Cell>(columns, Cell(0)));
 }
 
+Board::Board(const Board& saveState) : rows(saveState.rows), columns(saveState.columns), grid(saveState.grid) {}
 
-void Board::Show() {
-	for (int r = 0; r < rows; r++) {
-		for (int c = 0; c < columns; c++) {
-			std::cout << std::setw(6) << grid[r][c].GetValue();
+std::ostream& operator<<(std::ostream& os, const Board& board) {
+	for (int r = 0; r < board.rows; r++) {
+		for (int c = 0; c < board.columns; c++) {
+			os << std::setw(6) << board.grid[r][c].GetValue();
 		}
-		std::cout << "\n";
+		os << "\n";
 	}
+	return os;
 }
 
 

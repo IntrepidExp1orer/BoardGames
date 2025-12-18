@@ -2,7 +2,7 @@
 
 Cell::Cell(int val) : value(val) {}
 
-int Cell::GetValue() {
+int Cell::GetValue() const {
 	return value;
 }
 

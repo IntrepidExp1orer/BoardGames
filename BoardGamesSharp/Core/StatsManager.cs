@@ -20,32 +20,48 @@ internal class StatsManager
     {
         allPlayers.Clear();
 
-        if (File.Exists(filename))
+        try
         {
-            using (StreamReader fin = new StreamReader(filename))
+            if (File.Exists(filename))
             {
-                string line;
-                while ((line = fin.ReadLine()) != null)
+                using (StreamReader fin = new StreamReader(filename))
                 {
-                    string[] lines = line.Split(' ');
-                    string name = lines[0];
-                    Player oldPlayer = new Player(name);
-                    int.TryParse(lines[1], out int wins);
-                    oldPlayer.Wins = wins;
-                    allPlayers.Add(oldPlayer);
+                    string line;
+                    while ((line = fin.ReadLine()) != null)
+                    {
+                        string[] lines = line.Split(' ');
+
+                        if (lines.Length != 2 || !int.TryParse(lines[1], out int wins))
+                        {
+                            throw new FormatException("Неверный формат строки статистики");
+                        }
+
+                        string name = lines[0];
+                        Player oldPlayer = new Player(name); 
+                        oldPlayer.winCount = wins;
+                        allPlayers.Add(oldPlayer);
+                    }
                 }
             }
         }
 
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine("Файл не найден. Будет создан новый.");
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine("Файл поврежден.");
+        }
 
         foreach (Player current in currentPlayers)
         {
             bool found = false;
             foreach (Player saved in allPlayers)
             {
-                if (saved.Name == current.Name)
+                if (saved.name == current.name)
                 {
-                    current.Wins = saved.Wins;
+                    current.winCount = saved.winCount;
                     found = true;
                     break;
                 }
@@ -62,9 +78,9 @@ internal class StatsManager
         {
             foreach (Player saved in allPlayers)
             {
-                if (saved.Name == current.Name)
+                if (saved.name == current.name)
                 {
-                    saved.Wins = current.Wins;
+                    saved.winCount = current.winCount;
                     break;
                 }
             }
@@ -74,7 +90,7 @@ internal class StatsManager
         {
             foreach (Player player in allPlayers)
             {
-                fout.WriteLine($"{player.Name} {player.Wins}");
+                fout.WriteLine($"{player.name} {player.winCount}");
             }
         }
     }
@@ -85,7 +101,7 @@ internal class StatsManager
         Console.WriteLine("--- Статистика побед ---");
         foreach (Player player in allPlayers)
         {
-            Console.WriteLine($"{player.Name}: {player.Wins} побед");
+            Console.WriteLine($"{player.name}: {player.winCount} побед");
         }
     }
 }

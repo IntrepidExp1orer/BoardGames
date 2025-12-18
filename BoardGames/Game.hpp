@@ -1,16 +1,22 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <memory>
 #include "Player.hpp"
 
 class Game {
-protected:
-	std::string currentGame;
-	std::vector<Player>& players;
+
 public:
-	explicit Game(std::vector<Player>& currentPlayers);
+	using PlayerPtr = std::shared_ptr<Player>;
+
+	explicit Game(const std::vector<PlayerPtr>& players);
 	virtual ~Game() = default;
 
 	virtual void Start() = 0;
-	std::vector<Player> GetPlayerList();
+
+	const std::vector<PlayerPtr>& GetPlayerList() const;
+
+protected:
+	std::string currentGame;
+	std::vector<PlayerPtr> players;
 };

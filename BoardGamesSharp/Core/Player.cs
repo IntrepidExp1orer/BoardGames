@@ -8,12 +8,12 @@ namespace BoardGamesSharp.Core;
 
 public class Player
 {
-    private string name;
-    private int winCount;
+    public string name { get; }
+    public int winCount { get; set; }
 
-    public Player(string in_name)
+    public Player(string name)
     {
-        name = in_name;
+        this.name = name;
         winCount = 0;
     }
 
@@ -21,14 +21,4 @@ public class Player
         winCount++;
     }
 
-    public int Wins
-    {
-        get { return winCount; }
-        set { winCount = value; }
-    }   
-
-    public string Name
-    {
-        get { return name; }
-    }
 }

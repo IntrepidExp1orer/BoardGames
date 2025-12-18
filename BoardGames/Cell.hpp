@@ -6,7 +6,7 @@ private:
 public:
 	Cell(int value = 0);
 	
-	int GetValue();
+	int GetValue() const;
 	void SetValue(int val);
 	void Clear();
 };

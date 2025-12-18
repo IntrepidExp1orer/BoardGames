@@ -10,18 +10,13 @@ StatsManager::StatsManager(const std::string& file) : filename(file) {
 }
 
 
-void StatsManager::LoadStats(std::vector<Player>& currentPlayers) {
+void StatsManager::LoadStats(std::vector <std::shared_ptr<Player>>& currentPlayers) {
 	allPlayers.clear();
 
-	std::ofstream fout("game_stats.txt");
-	if (!fout.is_open()) {
-		std::cerr << "Ошибка создания файла!\n";
-	}
-	fout.close();
 
 	std::ifstream fin(filename);
 	if (!fin.is_open()) {
-		std::cout << "Ошибка при открытии файла.\n";
+		std::ofstream fout("game_stats.txt");
 		return;
 	}
 
@@ -29,18 +24,18 @@ void StatsManager::LoadStats(std::vector<Player>& currentPlayers) {
 	std::string name;
 	int wins;
 	while (fin >> name >> wins) {
-			Player old(name);
-			old.SetStats(wins);
-			allPlayers.push_back(old);
+		auto old = std::make_shared<Player>(name);
+		old->SetStats(wins);
+		allPlayers.push_back(old);
 	}
 	fin.close();
 
 	// Добавление текущих для вывода статистики
-	for (Player& current : currentPlayers) {
+	for (auto& current : currentPlayers) {
 		bool found = false;
-		for (Player& saved : allPlayers) {
-			if (saved.GetName() == current.GetName()) {
-				current.SetStats(saved.GetStats());
+		for (auto& saved : allPlayers) {
+			if (saved->GetName() == current->GetName()) {
+				current->SetStats(saved->GetStats());
 				found = true;
 				break;
 			}
@@ -51,12 +46,12 @@ void StatsManager::LoadStats(std::vector<Player>& currentPlayers) {
 }
 
 
-void StatsManager::SaveStats(std::vector<Player>& currentPlayers) {
+void StatsManager::SaveStats(const std::vector<std::shared_ptr<Player>>& currentPlayers) {
 	// Обновление статистики в списке всех игроков
-	for (Player& current : currentPlayers) {
-		for (Player& saved : allPlayers) {
-			if (saved.GetName() == current.GetName()) {
-				saved.SetStats(current.GetStats());
+	for (auto& current : currentPlayers) {
+		for (auto& saved : allPlayers) {
+			if (saved->GetName() == current->GetName()) {
+				saved->SetStats(current->GetStats());
 				break;
 			}
 		}
@@ -71,8 +66,8 @@ void StatsManager::SaveStats(std::vector<Player>& currentPlayers) {
 	// Сохранение статистики в файл
 	std::string name;
 	int wins;
-	for (Player& player : allPlayers) {
-		fout << player.GetName() << " " << player.GetStats() << "\n";
+	for (auto& player : allPlayers) {
+		fout << player->GetName() << " " << player->GetStats() << "\n";
 	}
 
 	fout.close();
@@ -81,7 +76,7 @@ void StatsManager::SaveStats(std::vector<Player>& currentPlayers) {
 
 void StatsManager::ShowStats() {
 	std::cout << "--- Статистика побед ---\n";
-	for (Player& player : allPlayers) {
-		std::cout << player.GetName() << ": " << player.GetStats() << " побед\n";
+	for (auto& player : allPlayers) {
+		std::cout << player->GetName() << ": " << player->GetStats() << " побед\n";
 	}
 }

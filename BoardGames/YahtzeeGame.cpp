@@ -5,27 +5,30 @@
 #include "Board.hpp"
 
 
-YahtzeeGame::YahtzeeGame(std::vector<Player>& currentPlayers) : Game(currentPlayers) {}
+YahtzeeGame::YahtzeeGame(const std::vector<PlayerPtr>& players) : Game(players) {}
+
+int YahtzeeGame::hands = 6;
 
 void YahtzeeGame::Start() {
 	srand(static_cast<unsigned>(time(nullptr)));
 
-	Board scoreBoard(HANDS + 1, players.size());
+	Board scoreBoard(hands + 1, players.size());
 
 	std::cout << "\n----- Yahtzee -----\n";
-	scoreBoard.Show();
-	for (int i = 0; i < HANDS; i++) {
+	std::cout << scoreBoard << std::endl;
+	for (int i = 0; i < hands; i++) {
 		for (int j = 0; j < players.size(); j++) {
-			std::cout << "\n- Игрок " << players[j].GetName() << ":\n";
+			std::string message = "Игрок " + players[j]->GetName() + ":\n";
+			std::cout << message;
 			dice.RollAll();
-			dice.Show();
+			std::cout << dice << std::endl;
 			Process_move();
 
 			// На данный момент не отражает реальный геймплей
 			scoreBoard.SetValue(i, j, dice.Sum());
 			scoreBoard.PointSum(j);
 		}
-		scoreBoard.Show();
+		std::cout << scoreBoard << std::endl;
 	}
 
 	// Зачисление победы
@@ -33,7 +36,7 @@ void YahtzeeGame::Start() {
 	int win_points = 0;
 	bool draw = false;
 	for (int j = 0; j < players.size(); j++) {
-		int p = scoreBoard.GetValue(HANDS, j);
+		int p = scoreBoard.GetValue(hands, j);
 		if (p == win_points) draw = true;
 		if (p > win_points) {
 			win_points = p;
@@ -43,8 +46,8 @@ void YahtzeeGame::Start() {
 	}
 
 	if (!draw) {
-		players[winner].AddWin();
-		std::cout << "Победил " << players[winner].GetName();
+		players[winner]->AddWin();
+		std::cout << "Победил " << players[winner]->GetName();
 	}
 }
 
@@ -69,9 +72,17 @@ void YahtzeeGame::Process_move() {
 		while (ss >> temp) indices.push_back(temp);
 
 		dice.RollSelected(indices);
-		dice.Show();
+		std::cout << dice << std::endl;
 		extraRolls--;
 	}
+}
 
 
+void YahtzeeGame::SetHands(int number) {
+	hands = number;
+}
+
+
+int YahtzeeGame::GetHands() {
+	return hands;
 }

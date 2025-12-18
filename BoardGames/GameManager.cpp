@@ -6,7 +6,7 @@
 
 
 void GameManager::Run() {
-    auto currentGame = ChooseGame();
+    currentGame = ChooseGame();
 
     if (!currentGame) {
         std::cout << "Выход из программы.\n";
@@ -18,7 +18,7 @@ void GameManager::Run() {
 
     std::cout << "\nТекущие результаты после игры:\n";
     for (auto& p : players)
-        std::cout << p.GetName() << ": " << p.GetStats() << "\n";
+        std::cout << p->GetName() << ": " << p->GetStats() << "\n";
 }
 
 void GameManager::AddPlayers() {
@@ -31,7 +31,7 @@ void GameManager::AddPlayers() {
         std::string name;
         std::cout << "Имя игрока " << i + 1 << ": ";
         std::cin >> name;
-        players.emplace_back(name);
+        players.push_back(std::make_shared<Player>(name));
     }
 }
 
@@ -50,6 +50,17 @@ std::unique_ptr<Game> GameManager::ChooseGame() {
 
     switch (gameChoice) {
     case 1:
+        std::cout << "Хотите изменить число ходов? (Тек.: " << YahtzeeGame::GetHands() << ") ";
+        char choice;
+        std::cin >> choice;
+        if (choice == 'y' || choice == 'Y') {
+            int num = 0;
+            while (num < 2 || num > 19) {
+                std::cout << "Выберете число ходов (от 2 до 19): ";
+                std::cin >> num;
+            }
+            YahtzeeGame::SetHands(num);
+        }
         return std::make_unique<YahtzeeGame>(players);
     case 0:
         return nullptr;
@@ -60,6 +71,3 @@ std::unique_ptr<Game> GameManager::ChooseGame() {
 }
 
 
-std::vector<Player>& GameManager::GetPlayerList() {
-    return players;
-}
