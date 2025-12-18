@@ -10,6 +10,7 @@ private:
 	static int hands;
 public:
 	YahtzeeGame(const std::vector<PlayerPtr>& players);
+	~YahtzeeGame() override;
 	void Start() override;
 	void Process_move();
 	void Rules() const override;
