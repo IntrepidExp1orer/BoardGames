@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BoardGamesSharp.Core;
 
-public class Board
+public class Board : ICloneable
 {
     private int rows;
     private int columns;
@@ -69,4 +70,16 @@ public class Board
         grid[rows-1, column].val = pointSum;
         return pointSum;
     }
+
+    public object Clone()
+    {
+        return (Board)this.MemberwiseClone();
+    }
+
+    public object DeepClone()
+    {
+        return new Board(rows, columns);
+    }
 }
+
+

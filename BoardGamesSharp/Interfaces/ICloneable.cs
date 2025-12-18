@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoardGamesSharp.Interfaces
+namespace BoardGamesSharp.Interfaces;
+
+interface ICloneable
 {
-    internal interface IRollable
-    {
-        void Roll(List<int> indices);
-    }
+    object Clone();
 }
