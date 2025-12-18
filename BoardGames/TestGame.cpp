@@ -16,3 +16,8 @@ void TestGame::Start() {
 void TestGame::Rules() const {
     std::cout << "Тестовая игра, правил нет.\n";
 }
+
+TestGame& TestGame::operator=(const Game& other) {
+    if (this == &other) return *this;
+    return *this;
+}

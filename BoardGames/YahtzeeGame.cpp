@@ -91,3 +91,10 @@ void YahtzeeGame::Rules() const {
 	Game::Rules();
 	std::cout << "Игроки по очереди бросают кубики до трех раз за ход.\nПри перебросе можно выбрать какие кубики оставить.\nЦель - выбить максимум очков.\n";
 }
+
+YahtzeeGame& YahtzeeGame::operator=(const Game& other) {
+	if (this == &other) return *this;
+
+	this->players = other.GetPlayerList();
+	return *this;
+}

@@ -16,4 +16,6 @@ public:
 
 	static void SetHands(int number);
 	static int GetHands();
+
+	YahtzeeGame& operator=(const Game& other);
 };

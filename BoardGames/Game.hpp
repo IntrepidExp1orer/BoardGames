@@ -19,7 +19,7 @@ public:
 
 	const std::vector<PlayerPtr>& GetPlayerList() const;
 
+	Game& operator=(const Game&) = delete;
 protected:
-	std::string currentGame;
 	std::vector<PlayerPtr> players;
 };

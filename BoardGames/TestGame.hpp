@@ -11,4 +11,5 @@ public:
 	void Start() override;
 	void Rules() const override;
 
+	TestGame& operator=(const Game& other);
 };
