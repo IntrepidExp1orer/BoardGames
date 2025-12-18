@@ -2,7 +2,7 @@
 #include <iostream>
 #include "TestGame.hpp"
 
-TestGame::TestGame(const std::vector<PlayerPtr>& players) : Game(players) {}
+TestGame::TestGame(const std::vector<PlayerPtr>& players, std::string name) : Game(players, name) {}
 
 TestGame::~TestGame() {
     std::cout << "TestGame destroyed\n";
@@ -10,7 +10,7 @@ TestGame::~TestGame() {
 
 
 void TestGame::Start() {
-    std::cout << "Запуск тестовой игры\n";
+    GameInfo(currentGame);
 }
 
 void TestGame::Rules() const {
@@ -20,4 +20,9 @@ void TestGame::Rules() const {
 TestGame& TestGame::operator=(const Game& other) {
     if (this == &other) return *this;
     return *this;
+}
+
+
+void TestGame::GameInfo(std::string n) {
+    std::cout <<  "Тест производного класса. Вызов игры #" << currentGame;
 }

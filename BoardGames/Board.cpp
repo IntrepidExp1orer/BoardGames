@@ -4,7 +4,6 @@
 
 
 Board::Board(int row, int column) : rows(row), columns(column) {
-	// grid.resize(rows, std::vector<Cell>(columns, Cell(0)));
 
 	grid.resize(rows);
 	for (int i = 0; i < rows; ++i) {
@@ -15,7 +14,6 @@ Board::Board(int row, int column) : rows(row), columns(column) {
 	}
 }
 
-Board::Board(const Board& saveState) : rows(saveState.rows), columns(saveState.columns), grid(saveState.grid) {}
 
 std::ostream& operator<<(std::ostream& os, const Board& board) {
 	for (int r = 0; r < board.rows; r++) {
@@ -55,7 +53,9 @@ int Board::PointSum(int col) {
 }
 
 std::shared_ptr<Board> Board::ShallowClone() const {
-	return std::make_shared<Board>(*this);
+	auto clone = std::make_shared<Board>(rows, columns);
+	clone->grid = this->grid;
+	return clone;
 }
 
 

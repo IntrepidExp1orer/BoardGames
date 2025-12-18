@@ -35,7 +35,7 @@ public class YahtzeeGame : Game, IRollable, IScorable
             for (int j = 0; j < players.Count; j++)
             {
                 Console.WriteLine($"\nИгрок {players[j].name}:");
-                Roll([0, 1, 2, 3, 4]);
+                Roll();
                 ProcessMove();
 
 
@@ -122,6 +122,12 @@ public class YahtzeeGame : Game, IRollable, IScorable
     public void Roll(List<int> indices)
     {
         dice.RollSelected(indices);
+        dice.Show();
+    }
+
+    public void Roll()
+    {
+        dice.RollAll();
         dice.Show();
     }
 
