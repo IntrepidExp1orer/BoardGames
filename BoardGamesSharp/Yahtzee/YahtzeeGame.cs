@@ -125,7 +125,11 @@ public class YahtzeeGame : Game, IRollable, IScorable
         dice.Show();
     }
 
-
+    public override void PrintRules()
+    {
+        base.PrintRules();
+        Console.WriteLine("Игроки по очереди бросают кубики до трех раз за ход.\nПри перебросе можно выбрать какие кубики оставить.\nЦель - выбить максимум очков.\n");
+    }
 }
 
 

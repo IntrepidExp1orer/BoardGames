@@ -23,4 +23,9 @@ public abstract class Game
     {
         return players;
     }
+
+    public virtual void PrintRules()
+    {
+        Console.WriteLine("Общие правила игры\n");
+    }
 }
