@@ -19,4 +19,5 @@ public:
 private:
 	std::vector<PlayerPtr> players;
 	std::unique_ptr<Game> currentGame;
+	int totalGames = 0;
 };

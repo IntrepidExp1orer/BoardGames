@@ -4,23 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BoardGamesSharp.Core;
+using BoardGamesSharp.Interfaces;
 
 namespace BoardGamesSharp.Yahtzee;
 
-public class YahtzeeGame : Game
+public class YahtzeeGame : Game, IRollable, IScorable
 {
     private const int Hands = 6;
 
     private Dice dice = new Dice();
 
+    private Board scoreBoard;
+    private bool drawStatus = false;
+
     public YahtzeeGame(List<Player> currentPlayers) : base(currentPlayers)
     {
         currentGame = "Yahtzee";
+        scoreBoard = new Board(Hands + 1, players.Count);
     }
 
     public override void Start()
     {
-        Board scoreBoard = new Board(Hands + 1, players.Count);
+        // Board scoreBoard = new Board(Hands + 1, players.Count);
 
         Console.WriteLine("\n----- Yahtzee -----");
         scoreBoard.Show();
@@ -30,8 +35,7 @@ public class YahtzeeGame : Game
             for (int j = 0; j < players.Count; j++)
             {
                 Console.WriteLine($"\nИгрок {players[j].name}:");
-                dice.RollAll();
-                dice.Show();
+                Roll();
                 ProcessMove();
 
 
@@ -41,30 +45,45 @@ public class YahtzeeGame : Game
             scoreBoard.Show();
         }
 
-        int winner = 0;
+        Player winner = GetWinner();
+        if (!drawStatus && winner != null)
+        {
+            winner.AddWin();
+            Console.WriteLine($"Победил {winner.name}");
+        }
+        else
+        {
+            Console.WriteLine("Ничья");
+        }
+    }
+
+    public Player GetWinner()
+    {
         int winPoints = 0;
-        bool draw = false;
+        Player winner = null;
 
-        for (int j = 0; j < players.Count; j++)
+        foreach (var player in players)
         {
-            int p = scoreBoard.GetValue(Hands, j);
-            if (p == winPoints)
+            int score = CalculateScore(player);
+            if (score == winPoints)
             {
-                draw = true;
+                drawStatus = true;
             }
-            if (p > winPoints)
+            else if (score > winPoints)
             {
-                winPoints = p;
-                winner = j;
-                draw = false;
+                winPoints = score;
+                winner=player;
+                drawStatus = false;
             }
         }
 
-        if (!draw)
-        {
-            players[winner].AddWin();
-            Console.WriteLine($"Победил {players[winner].name}");
-        }
+        return winner;
+    }
+
+    public int CalculateScore(Player player)
+    {
+        int index = players.IndexOf(player);
+        return scoreBoard.GetValue(Hands, index);
     }
 
     public void ProcessMove()
@@ -93,10 +112,31 @@ public class YahtzeeGame : Game
 
             if (indices.Count > 0)
             {
-                dice.RollSelected(indices);
-                dice.Show();
+                Roll(indices);
                 extraRolls--;
             }
         }
     }
+
+
+    public void Roll(List<int> indices)
+    {
+        dice.RollSelected(indices);
+        dice.Show();
+    }
+
+    public void Roll()
+    {
+        dice.RollAll();
+        dice.Show();
+    }
+
+    public override void PrintRules()
+    {
+        base.PrintRules();
+        Console.WriteLine("Игроки по очереди бросают кубики до трех раз за ход.\nПри перебросе можно выбрать какие кубики оставить.\nЦель - выбить максимум очков.\n");
+    }
 }
+
+
+

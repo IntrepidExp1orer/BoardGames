@@ -5,7 +5,7 @@
 #include "Board.hpp"
 
 
-YahtzeeGame::YahtzeeGame(const std::vector<PlayerPtr>& players) : Game(players) {}
+YahtzeeGame::YahtzeeGame(const std::vector<PlayerPtr>& players, std::string name) : Game(players, name) {}
 
 int YahtzeeGame::hands = 6;
 
@@ -13,6 +13,8 @@ void YahtzeeGame::Start() {
 	srand(static_cast<unsigned>(time(nullptr)));
 
 	Board scoreBoard(hands + 1, players.size());
+
+	GameInfo(hands);
 
 	std::cout << "\n----- Yahtzee -----\n";
 	std::cout << scoreBoard << std::endl;
@@ -44,8 +46,10 @@ void YahtzeeGame::Start() {
 			draw = false;
 		}
 	}
-
-	if (!draw) {
+	if (players.empty()) {
+		std::cout << "Нет игроков в игре.\n";
+	}
+	else if (!draw) {
 		players[winner]->AddWin();
 		std::cout << "Победил " << players[winner]->GetName();
 	}
@@ -85,4 +89,22 @@ void YahtzeeGame::SetHands(int number) {
 
 int YahtzeeGame::GetHands() {
 	return hands;
+}
+
+void YahtzeeGame::Rules() const {
+	Game::Rules();
+	std::cout << "Игроки по очереди бросают кубики до трех раз за ход.\nПри перебросе можно выбрать какие кубики оставить.\nЦель - выбить максимум очков.\n";
+}
+
+YahtzeeGame& YahtzeeGame::operator=(const Game& other) {
+	if (this == &other) return *this;
+
+	this->players = other.GetPlayerList();
+	return *this;
+}
+
+
+void YahtzeeGame::GameInfo(int handCount) {
+	Game::GameInfo();
+	std::cout << " длина: " << hands << " ходов\n";
 }

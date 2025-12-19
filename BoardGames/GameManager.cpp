@@ -2,6 +2,7 @@
 #include <vector>
 #include "GameManager.hpp"
 #include "YahtzeeGame.hpp"
+#include "TestGame.hpp"
 #include "StatsManager.hpp"
 
 
@@ -12,8 +13,8 @@ void GameManager::Run() {
         std::cout << "Выход из программы.\n";
     }
     else {
-        std::cout << "Запуск игры...\n\n";
-        currentGame->Start();
+        totalGames++;
+        currentGame->Run();
     }
 
     std::cout << "\nТекущие результаты после игры:\n";
@@ -40,7 +41,8 @@ void GameManager::AddPlayers() {
 std::unique_ptr<Game> GameManager::ChooseGame() {
     std::cout << "\nВыберите игру:\n";
     std::cout << "1. Yahtzee\n";
-    std::cout << "2. (Пока не реализовано)\n";
+    std::cout << "2. Тест\n";
+    std::cout << "3. (Пока не реализовано)\n";
     std::cout << "0. Выход\n";
 
 
@@ -61,7 +63,9 @@ std::unique_ptr<Game> GameManager::ChooseGame() {
             }
             YahtzeeGame::SetHands(num);
         }
-        return std::make_unique<YahtzeeGame>(players);
+        return std::make_unique<YahtzeeGame>(players, "Yahtzee" + std::to_string(totalGames));
+    case 2:
+        return std::make_unique<TestGame>(players, std::to_string(totalGames));
     case 0:
         return nullptr;
     default:
