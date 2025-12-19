@@ -61,11 +61,14 @@ public class Board : ICloneable
     {
         if (column < 0 || column >= columns) return 0;
 
-        int pointSum = 0;
+        var values = new List<int>();
+
         for (int i = 0; i < rows - 1; i++)
         {
-            pointSum += grid[i, column].val;
+            values.Add(grid[i, column].val);
         }
+
+        int pointSum = Utils.SumScores(values);
 
         grid[rows-1, column].val = pointSum;
         return pointSum;
