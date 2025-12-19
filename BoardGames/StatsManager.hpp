@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "Player.hpp"
+#include "Game.hpp"
 
 class StatsManager {
 private:
@@ -12,4 +13,5 @@ public:
 	void LoadStats(std::vector <std::shared_ptr<Player>>& currentPlayers);
 	void SaveStats(const std::vector<std::shared_ptr<Player>>& currentPlayers);
 	void ShowStats();
+	bool FindYaht(std::vector<std::shared_ptr<Game>> gameHistory);
 };

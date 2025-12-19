@@ -6,11 +6,12 @@
 #include "StatsManager.hpp"
 
 
-void GameManager::Run() {
-    currentGame = ChooseGame();
+std::shared_ptr<Game> GameManager::Run() {
+    auto currentGame = ChooseGame();
 
     if (!currentGame) {
         std::cout << "Выход из программы.\n";
+        return nullptr;
     }
     else {
         totalGames++;
@@ -20,6 +21,8 @@ void GameManager::Run() {
     std::cout << "\nТекущие результаты после игры:\n";
     for (auto& p : players)
         std::cout << p->GetName() << ": " << p->GetStats() << "\n";
+
+    return currentGame;
 }
 
 void GameManager::AddPlayers() {
@@ -63,7 +66,7 @@ std::unique_ptr<Game> GameManager::ChooseGame() {
             }
             YahtzeeGame::SetHands(num);
         }
-        return std::make_unique<YahtzeeGame>(players, "Yahtzee" + std::to_string(totalGames));
+        return std::make_unique<YahtzeeGame>(players, "Yahtzee");
     case 2:
         return std::make_unique<TestGame>(players, std::to_string(totalGames));
     case 0:

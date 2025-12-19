@@ -52,7 +52,10 @@ void YahtzeeGame::Start() {
 	else if (!draw) {
 		players[winner]->AddWin();
 		std::cout << "Победил " << players[winner]->GetName();
+		winnerPlayer = players[winner]->GetName();
 	}
+
+	winPoints = win_points;
 }
 
 void YahtzeeGame::Process_move() {

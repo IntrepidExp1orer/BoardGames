@@ -21,5 +21,17 @@ void Game::Run() {
 }
 
 void Game::GameInfo() {
-	std::cout << "Начата игра: " << currentGame;
+	std::cout << "Игра: " << currentGame;
+}
+
+std::string Game::WinnerName() {
+	return winnerPlayer;
+}
+
+int Game::GetWinPoints() {
+	return winPoints;
+}
+
+std::string Game::GetName() {
+	return currentGame;
 }

@@ -18,9 +18,14 @@ public:
 	void Run();
 	void GameInfo();
 	const std::vector<PlayerPtr>& GetPlayerList() const;
+	std::string WinnerName();
+	int GetWinPoints();
+	std::string GetName();
 
 	Game& operator=(const Game&) = delete;
 protected:
 	std::vector<PlayerPtr> players;
 	std::string currentGame;
+	std::string winnerPlayer = "Нет победителей";
+	int winPoints = 0;
 };

@@ -80,3 +80,15 @@ void StatsManager::ShowStats() {
 		std::cout << player->GetName() << ": " << player->GetStats() << " побед\n";
 	}
 }
+
+bool StatsManager::FindYaht(std::vector<std::shared_ptr<Game>> gameHistory) {
+	auto yht = std::find_if(gameHistory.begin(), gameHistory.end(),
+		[](const std::shared_ptr<Game>& game) {
+			return game->GetName() == "Yahtzee";
+		}
+	);
+	if (yht == gameHistory.end()) {
+		return false;
+	}
+	return true;
+}

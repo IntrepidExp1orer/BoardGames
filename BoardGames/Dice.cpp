@@ -1,13 +1,18 @@
 ﻿#include "Dice.hpp"
+#include <algorithm>
 
 
 Dice::Dice() : values{1, 1, 1, 1, 1} {}
 
 void Dice::RollAll() {
-	for (int& i : values) {
-		int n = rand() % FACES + 1;
-		i = n;
-	}
+	std::transform(
+		values.begin(),
+		values.end(),
+		values.begin(),
+		[](int) {
+			return rand() % FACES + 1;
+		}
+	);
 }
 
 void Dice::RollSelected(const std::vector<int>& indices) {

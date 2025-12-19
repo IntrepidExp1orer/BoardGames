@@ -12,7 +12,7 @@ public:
 	GameManager() = default;
 	~GameManager() = default;
 
-	void Run();
+	std::shared_ptr<Game> Run();
 	std::unique_ptr<Game> ChooseGame();
 	void AddPlayers();
 	const std::vector<PlayerPtr>& GetPlayerList() const { return players; }
