@@ -1,6 +1,7 @@
 ﻿#include <iomanip>
 #include <iostream>
 #include "Board.hpp"
+#include "Utils.hpp"
 
 
 Board::Board(int row, int column) : rows(row), columns(column) {
@@ -43,10 +44,12 @@ void Board::SetValue(int row, int col, int val) {
 int Board::PointSum(int col) {
 	if (col < 0 || col >= columns) return 0;
 
-	int pointSum = 0;
+	std::vector<int> values;
 	for (int i = 0; i < rows - 1; i++) {
-		pointSum += grid[i][col]->GetValue();
+		values.push_back(grid[i][col]->GetValue());
 	}
+
+	int pointSum = SumScores(values);
 
 	grid[rows-1][col]->SetValue(pointSum);
 	return pointSum;

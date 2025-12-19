@@ -1,4 +1,5 @@
 ﻿#include "Dice.hpp"
+#include "Utils.hpp"
 #include <algorithm>
 
 
@@ -32,9 +33,7 @@ std::ostream& operator<<(std::ostream& os, const Dice& dice) {
 }
 
 int Dice::Sum() {
-	int s = 0;
-	for (int i : values) {
-		s += i;
-	}
+	int s = SumScores(values);
+
 	return s;
 }
